@@ -1,0 +1,41 @@
+# Backend MERN - Calendar - Gestor de opiniones
+
+Este proyecto funciona correctamente, explicacion en donde estaban y que hay que modificar, las correcciones estan hechas en este proyecto:
+
+
+1. Error al ejecutar a traves de "npm run dev" no existe el paquete nodemon
+
+2. parentesis en index.js en la linea 20:
+>Como estaba:
+--app.use( express.json );
+>Correccion:
+--app.use( express.json() );
+
+3. Correccion en las validaciones en routes/auth.js en el nombre de las variables no son las correctas sustituir nombre, correo, por name y email (una de las lineas de codigo que hay que corregir en la linea 17)
+
+
+4. Falta la funcion validarCampos para que las validaciones hechas en las funciones funcionen correctamente en routes/events.js
+
+5. Correccion del tipo de dato en models/Usuario.js en el dato email, ya que esta tipo Number y es un String
+
+6. En middlewares/validarCampos.js y en middlewares/validar-jwt.js se debe agregar request a la desestructuracion de la libreria de express para que funcione correctamente
+
+7. Modificar la linea 20 en "process.env.SECRET_JWT_SEED" ya que el mensaje secreto de .env es con una E y no con 2, correcccion: "process.env.SECRET_JWT_SED" y colocar falta colocar la funcion next() abajo de req.name = name; para que funcione correctamente
+
+8. Las llaves y los parentesis mal estructurados en helpers/jwt.js 
+
+9. En db/config.js en la linea 6-7 en "process.env.DB_CNN" quitar una "N", correcccion: "process.env.DB_CN"
+
+10. En controllers/auth.js se debe agregar request a la desestructuracion de la libreria de express, falta crear la importacion de la clase usuario, en la funcion revalidarToken, en la desestructuracion de "uid y name" al igualarlo a "req" falta colocar mas codigo: 
+>Como esta:
+--const {uid, name} = req;
+>como debe estar:
+--const {uid, name} = req.header('x-token')
+
+11. En controllers/events.js se debe agregar request a la desestructuracion de la libreria de express, la funcion de getEventos hay un error de sintaxis en "const eventos = await Evento.find().pupelate('user', 'name');"
+
+>correccion:
+--const eventos = await Evento.find().pupulate('user', 'name');
+
+-una letra mala que corregir (la e por la u)
+
